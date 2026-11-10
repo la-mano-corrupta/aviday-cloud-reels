@@ -34,6 +34,12 @@ CATEGORY_MAP = {
 }
 
 
+WORKER_URL = os.environ.get(
+    "AVIDAY_WORKER_URL",
+    "https://aviday-agent.shafiur-aviday-57a61e.workers.dev",
+).rstrip("/")
+
+
 def load_credentials() -> dict | None:
     # Support environment variables (for GitHub Actions secrets) or local youtube_credentials.json
     if os.environ.get("YOUTUBE_CLIENT_ID") and os.environ.get("YOUTUBE_REFRESH_TOKEN"):
@@ -52,24 +58,44 @@ def load_credentials() -> dict | None:
     return None
 
 
-def get_fresh_access_token(creds: dict) -> str:
-    payload = urllib.parse.urlencode(
-        {
-            "client_id": creds["client_id"],
-            "client_secret": creds["client_secret"],
-            "refresh_token": creds["refresh_token"],
-            "grant_type": "refresh_token",
-        }
-    ).encode("utf-8")
-    req = urllib.request.Request(
-        "https://oauth2.googleapis.com/token",
-        data=payload,
-        headers={"Content-Type": "application/x-www-form-urlencoded"},
-        method="POST",
-    )
-    with urllib.request.urlopen(req, timeout=30) as resp:
-        token_data = json.loads(resp.read().decode("utf-8"))
-    return token_data["access_token"]
+def get_fresh_access_token(creds: dict | None = None) -> str | None:
+    if creds and creds.get("client_id") and creds.get("refresh_token"):
+        payload = urllib.parse.urlencode(
+            {
+                "client_id": creds["client_id"],
+                "client_secret": creds["client_secret"],
+                "refresh_token": creds["refresh_token"],
+                "grant_type": "refresh_token",
+            }
+        ).encode("utf-8")
+        req = urllib.request.Request(
+            "https://oauth2.googleapis.com/token",
+            data=payload,
+            headers={"Content-Type": "application/x-www-form-urlencoded"},
+            method="POST",
+        )
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            token_data = json.loads(resp.read().decode("utf-8"))
+        return token_data.get("access_token")
+
+    # Fallback for GitHub Actions Cloud Renderer: mint short-lived access_token via Cloudflare Worker
+    try:
+        req = urllib.request.Request(
+            f"{WORKER_URL}/reels/youtube-token",
+            data=b"{}",
+            headers={
+                "Content-Type": "application/json",
+                "User-Agent": "Aviday-Cloud-Renderer/1.0",
+            },
+            method="POST",
+        )
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+            if data.get("ok") and data.get("access_token"):
+                return data["access_token"]
+    except Exception:
+        pass
+    return None
 
 
 def run_interactive_oauth(client_secrets_path: str, port: int = 8089):
@@ -173,15 +199,13 @@ def upload_youtube_short(
     cover_jpg: Path | None = None,
     privacy_status: str = "public",
 ) -> dict:
-    creds = load_credentials()
-    if not creds:
+    access_token = get_fresh_access_token(load_credentials())
+    if not access_token:
         return {
             "ok": False,
             "skipped": True,
             "reason": "youtube_credentials.json not configured yet (run `python3 youtube_shorts_uploader.py --auth --client-secrets client_secret.json`)",
         }
-
-    access_token = get_fresh_access_token(creds)
     clean_title = title.strip()
     if "#shorts" not in clean_title.lower():
         clean_title = f"{clean_title[:88]} #Shorts"
