@@ -10,6 +10,7 @@ Features:
 3. Automatically formats Title (<100 chars with #Shorts), Description, Tags, Category (27=Education / 24=Entertainment),
    `selfDeclaredMadeForKids=False`, and uploads the custom cover thumbnail (`thumbnails.set`).
 """
+from __future__ import annotations
 import argparse
 import http.server
 import json
