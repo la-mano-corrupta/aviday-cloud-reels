@@ -301,107 +301,86 @@ try {
         }
 
         // YouTube Shorts Specific Layout:
-        // - Top Header Banner (Y=80..560) holds the Shock Pill + 2-Line Giant Hook
-        // - Center 3D Subject (Y=580..1440) is 100% UNOBSTRUCTED with a glowing Red/Yellow Focal Callout Ring & Arrow
-        // - Bottom 25% (Y=1440..1920) is kept clean for YouTube Shorts UI Title & Views overlay!
+        // - Top Header Banner (Y=110..520) holds the Category Pill + 2-Line Giant Hook
+        // - Center 3D Subject (Y=540..1460) is 100% CLEAN & UNOBSTRUCTED
+        // - Bottom 25% (Y=1460..1920) is kept clean for YouTube Shorts UI Title & Views overlay!
         const ytGrad = ctx.createLinearGradient(0, 0, 0, 1920);
-        ytGrad.addColorStop(0.0, 'rgba(0,0,0,0.88)');
-        ytGrad.addColorStop(0.28, 'rgba(0,0,0,0.45)');
-        ytGrad.addColorStop(0.55, 'rgba(0,0,0,0.02)');
-        ytGrad.addColorStop(0.78, 'rgba(0,0,0,0.35)');
-        ytGrad.addColorStop(1.0, 'rgba(0,0,0,0.85)');
+        ytGrad.addColorStop(0.0, 'rgba(0,0,0,0.85)');
+        ytGrad.addColorStop(0.28, 'rgba(0,0,0,0.40)');
+        ytGrad.addColorStop(0.55, 'rgba(0,0,0,0.0)');
+        ytGrad.addColorStop(0.80, 'rgba(0,0,0,0.32)');
+        ytGrad.addColorStop(1.0, 'rgba(0,0,0,0.82)');
         ctx.fillStyle = ytGrad;
         ctx.fillRect(0, 0, 1080, 1920);
 
-        // High-contrast top accent border bar
-        ctx.fillStyle = '#FF0033';
-        ctx.fillRect(0, 0, 1080, 18);
-
-        // Top YouTube Red Pill Badge at Y=120
-        ctx.font = '900 40px Inter, Impact, sans-serif';
+        // Top Category Pill Badge at Y=115
+        ctx.font = '900 38px Inter, Impact, sans-serif';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        const ybw = Math.min(940, ctx.measureText(badge).width + 96);
-        const ybh = 78;
+        const ybw = Math.min(920, ctx.measureText(badge).width + 88);
+        const ybh = 74;
         const ybx = (1080 - ybw) / 2;
-        const yby = 96;
+        const yby = 110;
         ctx.save();
-        ctx.shadowColor = 'rgba(0,0,0,0.9)';
+        ctx.shadowColor = 'rgba(0,0,0,0.85)';
         ctx.shadowBlur = 24;
         ctx.shadowOffsetY = 8;
-        roundRect(ybx, yby, ybw, ybh, 18);
-        ctx.fillStyle = '#FF0033';
+        roundRect(ybx, yby, ybw, ybh, 37);
+        ctx.fillStyle = pal.badgeBg;
         ctx.fill();
-        ctx.lineWidth = 5;
-        ctx.strokeStyle = '#FFFFFF';
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = pal.accent;
         ctx.stroke();
         ctx.restore();
-        ctx.fillStyle = '#FFFFFF';
+        ctx.fillStyle = pal.badgeFg;
         ctx.fillText(badge, 540, yby + ybh / 2 + 2);
 
-        // Top Giant Hook Line 1 at Y=285
-        const ysz1 = fitFontSize(line1, 980, 114);
+        // Top Giant Hook Line 1 at Y=295
+        const ysz1 = fitFontSize(line1, 960, 110);
         ctx.font = '900 ' + ysz1 + 'px Inter, Impact, sans-serif';
         ctx.save();
         ctx.shadowColor = 'rgba(0,0,0,0.95)';
         ctx.shadowBlur = 28;
         ctx.shadowOffsetY = 10;
         ctx.lineJoin = 'round';
-        ctx.lineWidth = 24;
+        ctx.lineWidth = 22;
         ctx.strokeStyle = '#000000';
-        ctx.strokeText(line1, 540, 285);
+        ctx.strokeText(line1, 540, 295);
         ctx.fillStyle = '#FFFFFF';
-        ctx.fillText(line1, 540, 285);
+        ctx.fillText(line1, 540, 295);
         ctx.restore();
 
-        // Top Giant Hook Line 2 in Cyber Yellow Box at Y=425
-        const ysz2 = fitFontSize(line2, 920, 116);
+        // Top Giant Hook Line 2 in Category Accent Box at Y=435
+        const ysz2 = fitFontSize(line2, 900, 112);
         ctx.font = '900 ' + ysz2 + 'px Inter, Impact, sans-serif';
         const ytw2 = ctx.measureText(line2).width;
-        const yboxW = Math.min(1000, ytw2 + 88);
+        const yboxW = Math.min(980, ytw2 + 88);
         const yboxH = ysz2 + 42;
-        const yboxY = 430;
+        const yboxY = 435;
         ctx.save();
         ctx.translate(540, yboxY);
         ctx.rotate(-0.018);
-        ctx.shadowColor = 'rgba(0,0,0,0.9)';
+        ctx.shadowColor = 'rgba(0,0,0,0.88)';
         ctx.shadowBlur = 28;
         ctx.shadowOffsetY = 10;
         roundRect(-yboxW / 2, -yboxH / 2, yboxW, yboxH, 20);
-        ctx.fillStyle = '#FFE600';
+        ctx.fillStyle = pal.accent;
         ctx.fill();
-        ctx.lineWidth = 7;
+        ctx.lineWidth = 6;
         ctx.strokeStyle = '#000000';
         ctx.stroke();
         ctx.shadowColor = 'transparent';
-        ctx.fillStyle = '#050505';
+        if (pal.boxText === '#FFFFFF') {
+          ctx.lineJoin = 'round';
+          ctx.lineWidth = 14;
+          ctx.strokeStyle = '#000000';
+          ctx.strokeText(line2, 0, 4);
+        }
+        ctx.fillStyle = pal.boxText;
         ctx.fillText(line2, 0, 4);
         ctx.restore();
 
-        // Center-Right Glowing YouTube Red Focal Callout Arrow pointing at the 3D Hero Subject (Y=980)
-        ctx.save();
-        ctx.shadowColor = 'rgba(255,0,51,0.85)';
-        ctx.shadowBlur = 28;
-        ctx.strokeStyle = '#FF0033';
-        ctx.fillStyle = '#FF0033';
-        ctx.lineWidth = 14;
-        ctx.lineCap = 'round';
-        ctx.lineJoin = 'round';
-        // Curved arrow from top-right (880, 680) pointing to center hero (670, 880)
-        ctx.beginPath();
-        ctx.moveTo(890, 660);
-        ctx.quadraticCurveTo(840, 800, 690, 870);
-        ctx.stroke();
-        // Arrowhead
-        ctx.beginPath();
-        ctx.moveTo(675, 878);
-        ctx.lineTo(745, 888);
-        ctx.lineTo(718, 822);
-        ctx.closePath();
-        ctx.fill();
-        ctx.restore();
-
-        return cv.toDataURL('image/jpeg', 0.92);
+        return cv.toDataURL('image/jpeg', 0.93);
       })()
     };
   })()`;
