@@ -140,12 +140,13 @@ Return strictly JSON:
         "title": gen.get("title", topic),
         "caption": custom_caption or gen.get("caption") or f"{topic} ✨\n\nFollow @aviday_666_!\n\n#reels #fyp #viral",
     }
+    yt_cover = proj_dir / "review" / "cover_youtube.jpg"
     yt_res = upload_youtube_short(
         out_mp4,
         title=spec["title"],
         description=spec["caption"],
         style=style,
-        cover_jpg=cover_jpg,
+        cover_jpg=yt_cover if yt_cover.exists() else cover_jpg,
     )
     youtube_url = yt_res.get("url") if yt_res.get("ok") else None
     video_url = upload_to_litterbox(out_mp4)

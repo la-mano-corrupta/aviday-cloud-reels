@@ -305,12 +305,13 @@ async def build_and_publish_one(spec: dict, add_to_pool_only: bool = False):
         line2=spec.get("thumb_line2", "WHAT HAPPENS?!"),
         offset_sec=3.2,
     )
+    yt_cover = proj_dir / "review" / "cover_youtube.jpg"
     yt_res = upload_youtube_short(
         out_mp4,
         title=spec["title"],
         description=spec["caption"],
         style=style,
-        cover_jpg=cover_jpg,
+        cover_jpg=yt_cover if yt_cover.exists() else cover_jpg,
     )
     youtube_url = yt_res.get("url") if yt_res.get("ok") else None
     video_url = upload_to_litterbox(out_mp4)
