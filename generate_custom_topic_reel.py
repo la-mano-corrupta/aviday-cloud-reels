@@ -31,6 +31,93 @@ from synth_and_render import (
 )
 from youtube_shorts_uploader import upload_youtube_short
 
+ROTATED_STYLES = ["deep-dive", "night-file", "stick-story", "tall-tale"]
+
+VIRAL_TOPIC_CURRICULUM = {
+    "deep-dive": [
+        "What happens inside your body if you stop sleeping for 72 hours?",
+        "Why does your body suddenly jerk awake right as you fall asleep?",
+        "What actually happens inside your brain during a brain freeze?",
+        "What happens to your human body at the bottom of the Mariana Trench?",
+        "Why can't you tickle yourself even if you try your hardest?",
+        "What happens inside your stomach if you swallow chewing gum?",
+        "Why do your fingers wrinkle in water? (It is NOT osmosis!)",
+        "What happens to your blood if you ascend too fast from deep water?",
+        "How does rabies hijack the human nervous system to make you fear water?",
+        "What happens inside your eyes when you rub them and see geometric stars?",
+        "Why does biting aluminum foil send an electric shock through a filling?",
+        "What happens inside your body during the first 60 seconds in an ice bath?",
+        "How do painkillers actually know where the pain is in your body?",
+        "What happens to your muscles and bones after 30 days in zero gravity?",
+    ],
+    "night-file": [
+        "The unsolved disappearance of the 3 lighthouse keepers of Eilean Mor (1900)",
+        "The mysterious Dyatlov Pass incident where 9 hikers cut their tent from the inside",
+        "The ghost ship Mary Celeste found sailing with warm food still on the table",
+        "The Max Headroom broadcast signal intrusion that hijacked Chicago television in 1987",
+        "The Somerton Man (Tamam Shud case) found on an Australian beach with a secret code",
+        "The unsolved Sodder Children disappearance on Christmas Eve 1945",
+        "The mysterious Wow! radio signal from deep space that lasted 72 seconds and never repeated",
+        "The Lead Masks Case of two Brazilian technicians found on Vintem Hill in 1966",
+        "Flight 19: How five US Navy bombers vanished over the Atlantic in clear weather",
+        "The unsolved Isabella Stewart Gardner Museum heist where thieves stole $500M in 81 minutes",
+        "The Vela Incident: The unidentified double flash detected by satellite over the Indian Ocean",
+        "The mysterious disappearance of pilot Frederick Valentich after reporting a hovering craft",
+        "The Khamar-Daban incident where 6 experienced mountain hikers panicked in 1993",
+        "The Hinterkaifeck footprints in the snow that led toward the farm but never left",
+    ],
+    "stick-story": [
+        "What happens hour by hour if every human on Earth suddenly disappears except you?",
+        "How to survive if you wake up trapped inside a sinking car underwater",
+        "What happens if the global internet shuts down completely for 7 days?",
+        "How to survive if an elevator cable snaps while you are on the 40th floor",
+        "What happens if you get caught in a rip current and try to swim back to shore?",
+        "What happens hour by hour if Earth stops spinning for just 5 seconds?",
+        "How to survive if you fall onto subway tracks with a train approaching",
+        "What happens if all GPS satellites stop working at the same time?",
+        "How to survive being lost in the desert with only half a bottle of water",
+        "What happens if every bee on Earth disappears tomorrow morning?",
+        "How to escape quicksand if you sink up to your waist alone",
+        "What happens inside a modern city if the water treatment plants stop for 48 hours?",
+        "How to survive if lightning is about to strike where you are standing",
+        "What happens if the Moon suddenly moves twice as close to Earth?",
+    ],
+    "tall-tale": [
+        "In 1518, a town in France was struck by a mysterious plague that made 400 people dance for days",
+        "In 1932, the Australian military declared war on 20,000 emus with machine guns—and lost",
+        "In 1919, a 2.3-million-gallon tank of molasses burst in Boston and flooded the streets at 35 mph",
+        "In 1859, the United States and Britain almost went to war over a single stray pig",
+        "In 1904, the Olympic Marathon in St. Louis was so chaotic the winner rode in a car and ate rat poison",
+        "How a corporal bear named Wojtek was officially enlisted in the Polish Army and carried artillery shells",
+        "In 1814, a tsunami of 388,000 gallons of beer flooded the streets of London",
+        "In 1788, the Austrian army accidentally fought a battle against itself in the dark",
+        "How Napoleon Bonaparte was once attacked and overrun by a horde of 3,000 hungry rabbits",
+        "In 1962, a contagious laughing epidemic in Tanganyika forced 14 schools to shut down",
+        "How a cat named Unsinkable Sam survived the sinking of three different World War II warships",
+        "In 1835, the New York Sun convinced millions of readers that astronomers found bat-people on the Moon",
+        "How jockey Frank Hayes won a steeplechase horse race in 1923 despite passing away mid-race",
+        "In 1977, Pepsi briefly became one of the largest naval powers on Earth after trading soda for submarines",
+    ],
+}
+
+
+def pick_scheduled_style_and_topic(style_arg: str, topic_arg: str) -> tuple[str, str]:
+    slot_idx = int(time.time() // (6 * 3600))
+    if not style_arg or style_arg == "auto":
+        style = ROTATED_STYLES[slot_idx % 4]
+    else:
+        style = style_arg if style_arg in ROTATED_STYLES else ROTATED_STYLES[slot_idx % 4]
+
+    if not topic_arg or topic_arg == "auto" or topic_arg.startswith("Auto 6-Hour"):
+        bank = VIRAL_TOPIC_CURRICULUM[style]
+        day_cycle = (slot_idx // 4) % len(bank)
+        topic = bank[day_cycle]
+    else:
+        topic = topic_arg
+
+    return style, topic
+
+
 def call_gemini_json(prompt: str) -> dict:
     # Route through the Cloudflare Worker's 7-Key Gemini Router so no API keys are exposed in public GitHub repos!
     req = urllib.request.Request(
@@ -49,7 +136,8 @@ def call_gemini_json(prompt: str) -> dict:
 async def generate_and_publish_custom_topic(
     style: str, topic: str, custom_caption: str = "", job_id: str = "", add_to_pool_only: bool = False
 ):
-    style = style if style in ("deep-dive", "night-file", "stick-story", "tall-tale") else "deep-dive"
+    style, topic = pick_scheduled_style_and_topic(style, topic)
+    print(f"🎯 Selected 6h Rotated Niche: [{style}] | Topic: {topic}", flush=True)
     slug = f"aviday-custom-{style}-{int(time.time())}"
     proj_dir = PROJECTS_DIR / slug
     if proj_dir.exists():
@@ -178,8 +266,8 @@ Return strictly JSON:
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--style", default="deep-dive")
-    ap.add_argument("--topic", required=True)
+    ap.add_argument("--style", default="auto")
+    ap.add_argument("--topic", default="auto")
     ap.add_argument("--caption", default="")
     ap.add_argument("--job-id", default="")
     ap.add_argument("--pool", action="store_true")

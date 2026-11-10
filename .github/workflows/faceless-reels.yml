@@ -57,7 +57,7 @@ jobs:
           YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
         run: |
           python3 generate_custom_topic_reel.py \
-            --style "${{ github.event.inputs.style || 'deep-dive' }}" \
-            --topic "${{ github.event.inputs.topic || 'What happens inside your body when you stop sleeping for 48 hours?' }}" \
+            --style "${{ github.event.inputs.style || 'auto' }}" \
+            --topic "${{ github.event.inputs.topic || 'auto' }}" \
             --caption "${{ github.event.inputs.caption || '' }}" \
             --job-id "${{ github.event.inputs.job_id || '' }}"
