@@ -1,0 +1,73 @@
+{
+ "duration": 36.23,
+ "voice": "am_onyx",
+ "speed": 0.95,
+ "lines": [
+  {
+   "i": 0,
+   "text": "November twenty-fourth, nineteen seventy-one.",
+   "start": 0.6,
+   "end": 3.293
+  },
+  {
+   "i": 1,
+   "text": "A quiet man in a dark suit boards a flight to Seattle.",
+   "start": 3.713,
+   "end": 6.962
+  },
+  {
+   "i": 2,
+   "text": "The name on his ticket is Dan Cooper.",
+   "start": 7.382,
+   "end": 9.67
+  },
+  {
+   "i": 3,
+   "text": "Mid-flight, he hands the flight attendant a note.",
+   "start": 10.09,
+   "end": 12.726
+  },
+  {
+   "i": 4,
+   "text": "He wants two hundred thousand dollars, and four parachutes.",
+   "start": 13.146,
+   "end": 16.338
+  },
+  {
+   "i": 5,
+   "text": "In Seattle, he lets every passenger go.",
+   "start": 16.758,
+   "end": 19.327
+  },
+  {
+   "i": 6,
+   "text": "Then, somewhere over the dark forests of Washington, in the rain,",
+   "start": 19.747,
+   "end": 22.817
+  },
+  {
+   "i": 7,
+   "text": "he opens the rear stairs, and jumps.",
+   "start": 23.087,
+   "end": 25.213
+  },
+  {
+   "i": 8,
+   "text": "He was never seen again.",
+   "start": 25.633,
+   "end": 27.271
+  },
+  {
+   "i": 9,
+   "text": "Nine years later, a boy found some of the cash buried by a river.",
+   "start": 27.691,
+   "end": 31.407
+  },
+  {
+   "i": 10,
+   "text": "The rest of it, and Dan Cooper, are still missing.",
+   "start": 31.827,
+   "end": 34.53
+  }
+ ]
+}

@@ -1,0 +1,67 @@
+{
+ "duration": 37.383,
+ "voice": "am_michael",
+ "speed": 1.0,
+ "lines": [
+  {
+   "i": 0,
+   "text": "What happens if you hold your breath for as long as you can?",
+   "start": 0.35,
+   "end": 3.524
+  },
+  {
+   "i": 1,
+   "text": "For the first thirty seconds, nothing much.",
+   "start": 3.784,
+   "end": 6.048
+  },
+  {
+   "i": 2,
+   "text": "Your lungs are full, and your blood is still carrying plenty of oxygen.",
+   "start": 6.308,
+   "end": 10.764
+  },
+  {
+   "i": 3,
+   "text": "But carbon dioxide starts building up,",
+   "start": 11.024,
+   "end": 13.394
+  },
+  {
+   "i": 4,
+   "text": "and that, not the lack of oxygen, is what makes you desperate to breathe.",
+   "start": 13.914,
+   "end": 18.332
+  },
+  {
+   "i": 5,
+   "text": "Your diaphragm starts twitching, trying to force a breath,",
+   "start": 18.592,
+   "end": 21.872
+  },
+  {
+   "i": 6,
+   "text": "and your heart actually slows down to save oxygen.",
+   "start": 22.352,
+   "end": 25.568
+  },
+  {
+   "i": 7,
+   "text": "Push even further, and your brain simply switches you off.",
+   "start": 25.828,
+   "end": 29.208
+  },
+  {
+   "i": 8,
+   "text": "You pass out, and your body starts breathing again on its own.",
+   "start": 29.468,
+   "end": 32.976
+  },
+  {
+   "i": 9,
+   "text": "Which is why you should never try this underwater.",
+   "start": 33.236,
+   "end": 36.183
+  }
+ ]
+}

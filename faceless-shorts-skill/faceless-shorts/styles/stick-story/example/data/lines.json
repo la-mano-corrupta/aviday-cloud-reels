@@ -1,0 +1,79 @@
+{
+ "duration": 33.833,
+ "voice": "am_puck",
+ "speed": 1.0,
+ "lines": [
+  {
+   "i": 0,
+   "text": "What would you do if the power went out for three whole days?",
+   "start": 0.35,
+   "end": 3.073
+  },
+  {
+   "i": 1,
+   "text": "It's nine at night, and suddenly everything goes dark.",
+   "start": 3.333,
+   "end": 6.141
+  },
+  {
+   "i": 2,
+   "text": "Step one: don't touch the fridge.",
+   "start": 6.401,
+   "end": 7.981
+  },
+  {
+   "i": 3,
+   "text": "If you keep it closed, your food stays cold for about four hours, and a full freezer lasts two days.",
+   "start": 8.241,
+   "end": 13.718
+  },
+  {
+   "i": 4,
+   "text": "Step two: grab a flashlight, not a candle.",
+   "start": 13.978,
+   "end": 15.952
+  },
+  {
+   "i": 5,
+   "text": "Candles and dark rooms are a real fire risk.",
+   "start": 16.212,
+   "end": 18.678
+  },
+  {
+   "i": 6,
+   "text": "Step three: fill some bottles with water,",
+   "start": 18.938,
+   "end": 21.038
+  },
+  {
+   "i": 7,
+   "text": "about a gallon per person, every day.",
+   "start": 21.178,
+   "end": 23.121
+  },
+  {
+   "i": 8,
+   "text": "Step four: unplug your electronics,",
+   "start": 23.381,
+   "end": 25.337
+  },
+  {
+   "i": 9,
+   "text": "because when the power comes back, a surge can fry them.",
+   "start": 25.337,
+   "end": 28.248
+  },
+  {
+   "i": 10,
+   "text": "Day three: the lights flicker back on.",
+   "start": 28.508,
+   "end": 30.28
+  },
+  {
+   "i": 11,
+   "text": "And because you were ready, you're totally fine.",
+   "start": 30.54,
+   "end": 32.573
+  }
+ ]
+}

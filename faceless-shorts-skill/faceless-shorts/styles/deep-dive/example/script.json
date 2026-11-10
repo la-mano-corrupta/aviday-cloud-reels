@@ -1,0 +1,27 @@
+{
+  "title": "What Happens If You Hold Your Breath?",
+  "voice": "am_michael",
+  "speed": 1.0,
+  "lead": 0.35,
+  "outro": 1.0,
+  "gap": 0.26,
+  "music": "tension",
+  "sources": [
+    "Healthline, 'What happens when you hold your breath' (CO2 build-up drives the urge to breathe; involuntary breathing movements; fainting, after which breathing resumes)",
+    "UBC Science Creative Quarterly, 'Waiting to inhale: why it hurts to hold your breath' (CO2 sensing, diaphragm contractions)",
+    "Redwoods Group, 'Breath holding and shallow water blackout' (passing out underwater can be fatal)",
+    "Mammalian diving reflex: breath-holding slows the heart rate (bradycardia), most strongly with the face in cold water"
+  ],
+  "lines": [
+    { "text": "What happens if you hold your breath for as long as you can?", "caps": "What *happens | if you *hold | your *breath?" },
+    { "text": "For the first thirty seconds, nothing much.", "caps": "The first | *30 seconds | nothing *much" },
+    { "text": "Your lungs are full, and your blood is still carrying plenty of oxygen.", "caps": "Lungs are *full | your *blood | still has *oxygen" },
+    { "text": "But carbon dioxide starts building up,", "caps": "Carbon *dioxide | starts *building up" },
+    { "text": "and that, not the lack of oxygen, is what makes you desperate to breathe.", "caps": "That, *not | lack of *oxygen | makes you *desperate | to *breathe" },
+    { "text": "Your diaphragm starts twitching, trying to force a breath,", "caps": "Your *diaphragm | starts *twitching | trying to *force | a *breath" },
+    { "text": "and your heart actually slows down to save oxygen.", "caps": "Your *heart | slows *down | to save *oxygen" },
+    { "text": "Push even further, and your brain simply switches you off.", "caps": "Push even *further | your *brain | switches you *off" },
+    { "text": "You pass out, and your body starts breathing again on its own.", "caps": "You pass *out | your *body | *breathing again | on its *own" },
+    { "text": "Which is why you should never try this underwater.", "caps": "Which is *why | you should *never | try this *underwater", "gap": 0.2 }
+  ]
+}

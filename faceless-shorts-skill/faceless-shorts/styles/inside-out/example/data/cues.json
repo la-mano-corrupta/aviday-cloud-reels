@@ -1,0 +1,178 @@
+{
+ "duration": 35.954,
+ "cues": [
+  {
+   "t": 0.3,
+   "type": "pop",
+   "gain": 0.6
+  },
+  {
+   "t": 1.397,
+   "type": "gulp"
+  },
+  {
+   "t": 2.011,
+   "type": "boing",
+   "gain": 0.5
+  },
+  {
+   "t": 2.422,
+   "type": "whoosh"
+  },
+  {
+   "t": 2.622,
+   "type": "slide",
+   "dur": 2.8400000000000003
+  },
+  {
+   "t": 5.462,
+   "type": "plop"
+  },
+  {
+   "t": 6.232,
+   "type": "whoosh"
+  },
+  {
+   "t": 6.232,
+   "type": "bubbles",
+   "dur": 2.512999999999999
+  },
+  {
+   "t": 7.784,
+   "type": "sizzle",
+   "dur": 1
+  },
+  {
+   "t": 8.665,
+   "type": "whoosh"
+  },
+  {
+   "t": 9.004,
+   "type": "sparkle",
+   "dur": 1.2
+  },
+  {
+   "t": 12.253,
+   "type": "pop"
+  },
+  {
+   "t": 14.031,
+   "type": "whoosh"
+  },
+  {
+   "t": 14.481,
+   "type": "boing",
+   "gain": 0.7
+  },
+  {
+   "t": 15.531,
+   "type": "boing",
+   "gain": 0.7
+  },
+  {
+   "t": 16.581,
+   "type": "boing",
+   "gain": 0.7
+  },
+  {
+   "t": 17.631,
+   "type": "boing",
+   "gain": 0.7
+  },
+  {
+   "t": 18.16,
+   "type": "whoosh"
+  },
+  {
+   "t": 18.56,
+   "type": "thud"
+  },
+  {
+   "t": 21.846,
+   "type": "slam"
+  },
+  {
+   "t": 22.278,
+   "type": "whoosh"
+  },
+  {
+   "t": 22.378,
+   "type": "slide",
+   "dur": 2.319999999999996,
+   "gain": 0.6
+  },
+  {
+   "t": 24.718,
+   "type": "whoosh"
+  },
+  {
+   "t": 25.021,
+   "type": "tock"
+  },
+  {
+   "t": 25.324,
+   "type": "tock"
+  },
+  {
+   "t": 26.077,
+   "type": "zip"
+  },
+  {
+   "t": 27.296,
+   "type": "whoosh"
+  },
+  {
+   "t": 27.696,
+   "type": "plop",
+   "gain": 0.5
+  },
+  {
+   "t": 27.856,
+   "type": "plop",
+   "gain": 0.5
+  },
+  {
+   "t": 28.016,
+   "type": "plop",
+   "gain": 0.5
+  },
+  {
+   "t": 28.176,
+   "type": "plop",
+   "gain": 0.5
+  },
+  {
+   "t": 28.336,
+   "type": "plop",
+   "gain": 0.5
+  },
+  {
+   "t": 28.496,
+   "type": "plop",
+   "gain": 0.5
+  },
+  {
+   "t": 28.656,
+   "type": "plop",
+   "gain": 0.5
+  },
+  {
+   "t": 30.166,
+   "type": "whoosh"
+  },
+  {
+   "t": 32.011,
+   "type": "alarm",
+   "dur": 1.1270000000000082
+  },
+  {
+   "t": 33.138,
+   "type": "whoosh"
+  },
+  {
+   "t": 34.089,
+   "type": "pop",
+   "gain": 0.6
+  }
+ ]
+}

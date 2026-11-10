@@ -1,0 +1,167 @@
+{
+ "duration": 40.924,
+ "cues": [
+  {
+   "t": 0.1,
+   "type": "whoosh"
+  },
+  {
+   "t": 0.15,
+   "type": "pop",
+   "gain": 0.6
+  },
+  {
+   "t": 5.68,
+   "type": "whoosh"
+  },
+  {
+   "t": 5.78,
+   "type": "pop",
+   "gain": 0.5
+  },
+  {
+   "t": 9.939,
+   "type": "pop"
+  },
+  {
+   "t": 11.011,
+   "type": "whoosh"
+  },
+  {
+   "t": 13.993,
+   "type": "slide",
+   "dur": 1.6,
+   "gain": 0.7
+  },
+  {
+   "t": 15.591,
+   "type": "whoosh"
+  },
+  {
+   "t": 15.591,
+   "type": "pop",
+   "gain": 0.45
+  },
+  {
+   "t": 15.591,
+   "type": "sizzle",
+   "dur": 2
+  },
+  {
+   "t": 15.921,
+   "type": "pop",
+   "gain": 0.45
+  },
+  {
+   "t": 16.251,
+   "type": "pop",
+   "gain": 0.45
+  },
+  {
+   "t": 16.581,
+   "type": "pop",
+   "gain": 0.45
+  },
+  {
+   "t": 16.911,
+   "type": "pop",
+   "gain": 0.45
+  },
+  {
+   "t": 17.241,
+   "type": "pop",
+   "gain": 0.45
+  },
+  {
+   "t": 18.167,
+   "type": "whoosh"
+  },
+  {
+   "t": 18.267,
+   "type": "pop",
+   "gain": 0.5
+  },
+  {
+   "t": 20.318,
+   "type": "boing",
+   "gain": 0.5
+  },
+  {
+   "t": 21.395,
+   "type": "whoosh"
+  },
+  {
+   "t": 21.395,
+   "type": "sizzle",
+   "dur": 2.4,
+   "gain": 0.7
+  },
+  {
+   "t": 23.856,
+   "type": "whoosh"
+  },
+  {
+   "t": 23.936,
+   "type": "pop"
+  },
+  {
+   "t": 25.646,
+   "type": "pop"
+  },
+  {
+   "t": 27.596,
+   "type": "thud"
+  },
+  {
+   "t": 29.526,
+   "type": "whoosh"
+  },
+  {
+   "t": 30.589,
+   "type": "slam"
+  },
+  {
+   "t": 30.839,
+   "type": "thud",
+   "gain": 0.6
+  },
+  {
+   "t": 33.017,
+   "type": "whoosh"
+  },
+  {
+   "t": 33.267,
+   "type": "thud",
+   "gain": 0.35
+  },
+  {
+   "t": 33.417,
+   "type": "thud",
+   "gain": 0.35
+  },
+  {
+   "t": 33.567,
+   "type": "thud",
+   "gain": 0.35
+  },
+  {
+   "t": 33.717,
+   "type": "thud",
+   "gain": 0.35
+  },
+  {
+   "t": 33.867,
+   "type": "thud",
+   "gain": 0.35
+  },
+  {
+   "t": 35.855,
+   "type": "sparkle",
+   "dur": 1
+  },
+  {
+   "t": 37.017,
+   "type": "whoosh"
+  }
+ ]
+}

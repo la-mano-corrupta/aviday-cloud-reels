@@ -1,0 +1,11 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Style sheet</title>
+<style>
+@font-face { font-family: 'Inter'; font-weight: 900; src: url('fonts/Inter-Black.otf'); }
+@font-face { font-family: 'Inter'; font-weight: 800; src: url('fonts/Inter-Black.otf'); }
+@font-face { font-family: 'FreeMono'; font-weight: 700; src: url('fonts/FreeMonoBold.ttf'); }
+html, body { margin: 0; background: #111; } canvas { display: block; max-width: 100vw; height: auto; } #gl, #gl2 { display: none; }
+</style></head>
+<body><canvas id="cv" width="1920" height="1080"></canvas><canvas id="gl" width="1080" height="1920"></canvas><canvas id="gl2" width="1280" height="860"></canvas>
+<script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/addons/"}}</script>
+<script type="module" src="src/sheet.js"></script></body></html>

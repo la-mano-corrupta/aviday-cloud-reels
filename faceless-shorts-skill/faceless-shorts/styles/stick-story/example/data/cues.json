@@ -1,0 +1,182 @@
+{
+ "duration": 33.833,
+ "cues": [
+  {
+   "t": 0.2,
+   "type": "pop",
+   "gain": 0.5
+  },
+  {
+   "t": 3.253,
+   "type": "whoosh"
+  },
+  {
+   "t": 5.873,
+   "type": "thud"
+  },
+  {
+   "t": 5.923,
+   "type": "whoosh",
+   "gain": 0.6
+  },
+  {
+   "t": 6.321,
+   "type": "whoosh"
+  },
+  {
+   "t": 6.371,
+   "type": "pop"
+  },
+  {
+   "t": 7.645,
+   "type": "boing",
+   "gain": 0.5
+  },
+  {
+   "t": 8.161,
+   "type": "whoosh"
+  },
+  {
+   "t": 11.206,
+   "type": "pop"
+  },
+  {
+   "t": 12.524,
+   "type": "pop"
+  },
+  {
+   "t": 13.024,
+   "type": "sparkle",
+   "dur": 0.6
+  },
+  {
+   "t": 13.898,
+   "type": "whoosh"
+  },
+  {
+   "t": 13.948,
+   "type": "pop"
+  },
+  {
+   "t": 14.775,
+   "type": "tock"
+  },
+  {
+   "t": 15.644,
+   "type": "boing",
+   "gain": 0.5
+  },
+  {
+   "t": 16.132,
+   "type": "whoosh"
+  },
+  {
+   "t": 16.332,
+   "type": "alarm",
+   "dur": 1.2,
+   "gain": 0.6
+  },
+  {
+   "t": 18.858,
+   "type": "whoosh"
+  },
+  {
+   "t": 18.908,
+   "type": "pop"
+  },
+  {
+   "t": 19.178,
+   "type": "plop",
+   "gain": 0.45
+  },
+  {
+   "t": 19.398,
+   "type": "plop",
+   "gain": 0.45
+  },
+  {
+   "t": 19.618,
+   "type": "plop",
+   "gain": 0.45
+  },
+  {
+   "t": 19.838,
+   "type": "plop",
+   "gain": 0.45
+  },
+  {
+   "t": 20.058,
+   "type": "plop",
+   "gain": 0.45
+  },
+  {
+   "t": 20.278,
+   "type": "plop",
+   "gain": 0.45
+  },
+  {
+   "t": 21.198,
+   "type": "pop"
+  },
+  {
+   "t": 21.598,
+   "type": "pop"
+  },
+  {
+   "t": 21.998,
+   "type": "pop"
+  },
+  {
+   "t": 23.301,
+   "type": "whoosh"
+  },
+  {
+   "t": 23.351,
+   "type": "pop"
+  },
+  {
+   "t": 24.059,
+   "type": "pop",
+   "gain": 0.7
+  },
+  {
+   "t": 25.257,
+   "type": "whoosh"
+  },
+  {
+   "t": 27.265,
+   "type": "zip"
+  },
+  {
+   "t": 27.315,
+   "type": "slam",
+   "gain": 0.6
+  },
+  {
+   "t": 28.428,
+   "type": "whoosh"
+  },
+  {
+   "t": 29.515,
+   "type": "tock"
+  },
+  {
+   "t": 29.715,
+   "type": "tock"
+  },
+  {
+   "t": 30.315,
+   "type": "sparkle",
+   "dur": 0.8
+  },
+  {
+   "t": 30.46,
+   "type": "whoosh"
+  },
+  {
+   "t": 32.055,
+   "type": "sparkle",
+   "dur": 1
+  }
+ ]
+}

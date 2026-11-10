@@ -1,0 +1,67 @@
+{
+ "duration": 40.924,
+ "voice": "bm_george",
+ "speed": 1.0,
+ "lines": [
+  {
+   "i": 0,
+   "text": "In sixteen sixty-six, a tiny bakery fire burned down most of London.",
+   "start": 0.4,
+   "end": 5.46
+  },
+  {
+   "i": 1,
+   "text": "It started just after midnight, in Thomas Farriner's bakery on Pudding Lane.",
+   "start": 5.76,
+   "end": 10.791
+  },
+  {
+   "i": 2,
+   "text": "London was packed with wooden houses, and a strong wind was blowing,",
+   "start": 11.091,
+   "end": 15.321
+  },
+  {
+   "i": 3,
+   "text": "so the flames jumped from roof to roof.",
+   "start": 15.671,
+   "end": 17.947
+  },
+  {
+   "i": 4,
+   "text": "The Lord Mayor was woken up, but he shrugged it off.",
+   "start": 18.247,
+   "end": 21.175
+  },
+  {
+   "i": 5,
+   "text": "For four days, the city burned.",
+   "start": 21.475,
+   "end": 23.636
+  },
+  {
+   "i": 6,
+   "text": "Thirteen thousand houses, eighty-seven churches, and St Paul's Cathedral were gone.",
+   "start": 23.936,
+   "end": 29.306
+  },
+  {
+   "i": 7,
+   "text": "In the end, they blew up whole streets to stop it spreading.",
+   "start": 29.606,
+   "end": 32.797
+  },
+  {
+   "i": 8,
+   "text": "And when London was rebuilt, it was built in brick and stone.",
+   "start": 33.097,
+   "end": 36.797
+  },
+  {
+   "i": 9,
+   "text": "All because of one small bakery.",
+   "start": 37.097,
+   "end": 39.624
+  }
+ ]
+}

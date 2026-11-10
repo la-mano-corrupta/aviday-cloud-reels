@@ -1,0 +1,63 @@
+name: Aviday 24/7 Faceless Reels Cloud Generator (Every 6h + DM On-Demand)
+
+on:
+  schedule:
+    # Runs automatically 4 times a day (every 6 hours: 00:00, 06:00, 12:00, 18:00 UTC)
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+    inputs:
+      job_id:
+        description: 'Cloudflare Worker Queue Job ID'
+        required: false
+        default: ''
+      style:
+        description: 'Style (deep-dive, night-file, stick-story, tall-tale)'
+        required: false
+        default: 'deep-dive'
+      topic:
+        description: 'Topic for the Faceless Reel'
+        required: false
+        default: 'What happens inside your brain when you pull an all-nighter?'
+      caption:
+        description: 'Custom Instagram Reel caption + hashtags'
+        required: false
+        default: ''
+
+jobs:
+  render-and-publish-reel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install FFmpeg & Mesa llvmpipe (4x Faster CPU WebGL)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg mesa-vulkan-drivers libgl1-mesa-dri libegl1-mesa-dev
+          pip install numpy scipy edge-tts
+
+      - name: Render Faceless Reel & Dual-Publish to Instagram (@aviday_666_) + YouTube Shorts
+        env:
+          SOFTWARE_GL: '1'
+          QS: '&res=0.6&aa=0&shadow=1024'
+          FPS: '24'
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+        run: |
+          python3 generate_custom_topic_reel.py \
+            --style "${{ github.event.inputs.style || 'deep-dive' }}" \
+            --topic "${{ github.event.inputs.topic || 'What happens inside your body when you stop sleeping for 48 hours?' }}" \
+            --caption "${{ github.event.inputs.caption || '' }}" \
+            --job-id "${{ github.event.inputs.job_id || '' }}"
