@@ -22,10 +22,16 @@ on:
         description: 'Custom Instagram Reel caption + hashtags'
         required: false
         default: ''
+      existing_youtube_url:
+        description: 'Existing YouTube Short URL if already published'
+        required: false
+        default: ''
 
 jobs:
   render-and-publish-reel:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     timeout-minutes: 45
     steps:
       - name: Checkout repository
@@ -60,4 +66,5 @@ jobs:
             --style "${{ github.event.inputs.style || 'auto' }}" \
             --topic "${{ github.event.inputs.topic || 'auto' }}" \
             --caption "${{ github.event.inputs.caption || '' }}" \
-            --job-id "${{ github.event.inputs.job_id || '' }}"
+            --job-id "${{ github.event.inputs.job_id || '' }}" \
+            --existing-youtube-url "${{ github.event.inputs.existing_youtube_url || '' }}"

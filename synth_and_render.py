@@ -154,29 +154,51 @@ async def synthesize_narration(proj_dir: Path, style: str):
     print(f"   ✅ Synthesized {out_wav} ({dur:.2f}s, {voice})", flush=True)
 
 
-def upload_to_litterbox(mp4_path: Path) -> str:
-    print(f"   ☁️ Uploading {mp4_path.name} ({mp4_path.stat().st_size / 1024 / 1024:.2f} MB) to Litterbox (72h)..._ ", flush=True)
-    res = subprocess.run(
-        [
-            "curl",
-            "-sS",
-            "-F",
-            "reqtype=fileupload",
-            "-F",
-            "time=72h",
-            "-F",
-            f"fileToUpload=@{mp4_path}",
-            "https://litterbox.catbox.moe/resources/internals/api.php",
-        ],
-        capture_output=True,
-        text=True,
-        check=True,
-    )
-    url = res.stdout.strip()
-    if not url.startswith("https://"):
-        raise RuntimeError(f"Unexpected Litterbox response: {url}")
-    print(f"   🔗 Hosted MP4 URL: {url}", flush=True)
-    return url
+def upload_to_litterbox(file_path: Path) -> str:
+    print(f"   ☁️ Uploading {file_path.name} ({file_path.stat().st_size / 1024 / 1024:.2f} MB) for Meta Reels CDN...", flush=True)
+    # 1. Try Litterbox with browser User-Agent
+    try:
+        res = subprocess.run(
+            [
+                "curl",
+                "-sS",
+                "-A",
+                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+                "-F",
+                "reqtype=fileupload",
+                "-F",
+                "time=72h",
+                "-F",
+                f"fileToUpload=@{file_path}",
+                "https://litterbox.catbox.moe/resources/internals/api.php",
+            ],
+            capture_output=True,
+            text=True,
+            timeout=90,
+        )
+        url = res.stdout.strip()
+        if url.startswith("https://"):
+            print(f"   🔗 Hosted URL (Litterbox): {url}", flush=True)
+            return url
+    except Exception:
+        pass
+
+    # 2. Fallback for GitHub Actions Datacenter IPs: push to branch `media-cdn` on la-mano-corrupta/aviday-cloud-reels
+    repo_root = Path(__file__).resolve().parent
+    media_dir = repo_root / "cdn_media"
+    media_dir.mkdir(parents=True, exist_ok=True)
+    unique_name = f"{int(time.time())}_{file_path.name}"
+    dest = media_dir / unique_name
+    shutil.copy2(file_path, dest)
+    subprocess.run(["git", "config", "user.name", "Aviday Cloud CDN"], cwd=str(repo_root), check=True)
+    subprocess.run(["git", "config", "user.email", "cdn@aviday.dev"], cwd=str(repo_root), check=True)
+    subprocess.run(["git", "add", f"cdn_media/{unique_name}"], cwd=str(repo_root), check=True)
+    subprocess.run(["git", "commit", "-m", f"CDN asset {unique_name}"], cwd=str(repo_root), check=True)
+    commit_sha = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=str(repo_root), text=True).strip()
+    subprocess.run(["git", "push", "-f", "origin", "HEAD:refs/heads/media-cdn"], cwd=str(repo_root), check=True)
+    raw_url = f"https://raw.githubusercontent.com/la-mano-corrupta/aviday-cloud-reels/{commit_sha}/cdn_media/{unique_name}"
+    print(f"   🔗 Hosted URL (GitHub Media CDN): {raw_url}", flush=True)
+    return raw_url
 
 
 DEFAULT_BADGES = {

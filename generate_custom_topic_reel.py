@@ -134,7 +134,12 @@ def call_gemini_json(prompt: str) -> dict:
 
 
 async def generate_and_publish_custom_topic(
-    style: str, topic: str, custom_caption: str = "", job_id: str = "", add_to_pool_only: bool = False
+    style: str,
+    topic: str,
+    custom_caption: str = "",
+    job_id: str = "",
+    add_to_pool_only: bool = False,
+    existing_youtube_url: str = "",
 ):
     style, topic = pick_scheduled_style_and_topic(style, topic)
     print(f"🎯 Selected 6h Rotated Niche: [{style}] | Topic: {topic}", flush=True)
@@ -226,17 +231,21 @@ Return strictly JSON:
     spec = {
         "style": style,
         "title": gen.get("title", topic),
-        "caption": custom_caption or gen.get("caption") or f"{topic} ✨\n\nFollow @aviday_666_!\n\n#reels #fyp #viral",
+        "caption": gen.get("caption") or custom_caption or f"{topic} ✨\n\nFollow @aviday_666_!\n\n#reels #fyp #viral",
     }
     yt_cover = proj_dir / "review" / "cover_youtube.jpg"
-    yt_res = upload_youtube_short(
-        out_mp4,
-        title=spec["title"],
-        description=spec["caption"],
-        style=style,
-        cover_jpg=yt_cover if yt_cover.exists() else cover_jpg,
-    )
-    youtube_url = yt_res.get("url") if yt_res.get("ok") else None
+    if existing_youtube_url:
+        print(f"   📺 Using existing live YouTube Short: {existing_youtube_url}", flush=True)
+        youtube_url = existing_youtube_url
+    else:
+        yt_res = upload_youtube_short(
+            out_mp4,
+            title=spec["title"],
+            description=spec["caption"],
+            style=style,
+            cover_jpg=yt_cover if yt_cover.exists() else cover_jpg,
+        )
+        youtube_url = yt_res.get("url") if yt_res.get("ok") else None
     video_url = upload_to_litterbox(out_mp4)
     payload = json.dumps(
         {
@@ -270,6 +279,11 @@ if __name__ == "__main__":
     ap.add_argument("--topic", default="auto")
     ap.add_argument("--caption", default="")
     ap.add_argument("--job-id", default="")
+    ap.add_argument("--existing-youtube-url", default="")
     ap.add_argument("--pool", action="store_true")
     args = ap.parse_args()
-    asyncio.run(generate_and_publish_custom_topic(args.style, args.topic, args.caption, args.job_id, args.pool))
+    asyncio.run(
+        generate_and_publish_custom_topic(
+            args.style, args.topic, args.caption, args.job_id, args.pool, args.existing_youtube_url
+        )
+    )
