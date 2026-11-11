@@ -27,7 +27,7 @@ export function makeEngine(canvas, { w = W, h = H, samples = 4, shadowSize = 204
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, preserveDrawingBuffer: true });
   renderer.setSize(w, h, false); renderer.setPixelRatio(1);
   renderer.toneMapping = THREE.NeutralToneMapping; renderer.toneMappingExposure = 1.0;
-  renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap; renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.shadowMap.enabled = true; renderer.shadowMap.type = (AA > 0 ? THREE.PCFSoftShadowMap : THREE.BasicShadowMap); renderer.outputColorSpace = THREE.SRGBColorSpace;
   const pmrem = new THREE.PMREMGenerator(renderer), envMap = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
   const rt = new THREE.WebGLRenderTarget(w, h, { type: THREE.HalfFloatType, samples });
   renderer.userData = { shadowSize };
