@@ -73,7 +73,7 @@ const chrome = spawn(
     '--ignore-gpu-blocklist',
     '--enable-unsafe-swiftshader',
     ...(process.env.SOFTWARE_GL ? ['--use-angle=swiftshader'] : []),
-    ...(process.getuid?.() === 0 ? ['--no-sandbox'] : []),
+    '--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage',
     'about:blank'
   ],
   { stdio: 'ignore' }
