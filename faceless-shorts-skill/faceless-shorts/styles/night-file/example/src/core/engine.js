@@ -42,7 +42,7 @@ export function makeEngine(canvas, { w = W, h = H, samples = 4, shadowSize = 204
     /** look = { bloom, bloomThreshold, focus (m), aperture (0 = all sharp), maxblur, exposure, vignette, grain, warm, t } */
     render(scene, camera, look = {}) {
       rp.scene = scene; rp.camera = camera; bokeh.scene = scene; bokeh.camera = camera;
-      bokeh.enabled = (look.aperture ?? 0.0015) > 0;
+      bokeh.enabled = AA > 0 && (look.aperture ?? 0.0015) > 0;
       bokeh.uniforms.focus.value = look.focus ?? 3; bokeh.uniforms.aperture.value = look.aperture ?? 0.0015; bokeh.uniforms.maxblur.value = look.maxblur ?? 0.006;
       bloom.strength = look.bloom ?? 0.3; bloom.threshold = look.bloomThreshold ?? 0.85; bloom.radius = 0.6;
       renderer.toneMappingExposure = look.exposure ?? 1.0;

@@ -117,8 +117,27 @@ async def synthesize_narration(proj_dir: Path, style: str):
             target_dur = max(0.4, end_s - start_s)
 
             mp3_path = tmpdir_p / f"line_{idx}.mp3"
-            comm = edge_tts.Communicate(text, voice, rate="+5%")
-            await comm.save(str(mp3_path))
+            clean_text = text.replace("*", "").strip() or "..."
+            fallback_voices = [voice, "en-US-ChristopherNeural", "en-US-GuyNeural", "en-US-BrianNeural"]
+            synthesized = False
+            for attempt, v_try in enumerate(fallback_voices):
+                try:
+                    rate_arg = "+5%" if attempt == 0 else "+0%"
+                    comm = edge_tts.Communicate(clean_text, v_try, rate=rate_arg)
+                    await comm.save(str(mp3_path))
+                    if mp3_path.exists() and mp3_path.stat().st_size > 200:
+                        synthesized = True
+                        break
+                except Exception as e_tts:
+                    print(f"   ⚠️ edge-tts attempt {attempt+1} failed for line {idx} ({v_try}): {e_tts}", flush=True)
+                    await asyncio.sleep(0.8 * (attempt + 1))
+
+            if not synthesized:
+                import urllib.parse
+                q = urllib.parse.quote(clean_text[:200])
+                gtts_url = f"https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=en&q={q}"
+                req_tts = urllib.request.Request(gtts_url, headers={"User-Agent": "Mozilla/5.0"})
+                mp3_path.write_bytes(urllib.request.urlopen(req_tts, timeout=20).read())
 
             # Decode mp3 to 24kHz mono float32 via ffmpeg
             raw = subprocess.run(
